@@ -1,0 +1,17 @@
+/*
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 69px;
+}
+
+@media screen and (max-width: 64em) {
+  :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    top: 99px;
+  }
+}
+*/
+
+:host ::ng-deep tr.p-highlight i {
+  color: #ffffff;
+}

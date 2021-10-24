@@ -1,0 +1,115 @@
+<div class="p-grid">
+    <div [ngClass]="getMasterDetailClass('MASTER')">
+        <p-card>
+            <ng-template pTemplate="header">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left">
+                        <h4>
+                            <i class="fas fa-list-ul p-pr-2"></i>
+                            <strong>Liste des menus</strong>
+                        </h4>
+                    </div>
+                    <div class="p-toolbar-group-right">
+                        <app-menu-master
+                            [criteria]="criteria"
+                            (criteriaClick)="onClickCriteria()"
+                            (addClick)="onAddClick()"
+                            (reloadClick)="onClickReload()"
+                        ></app-menu-master>
+                    </div>
+                </p-toolbar>
+            </ng-template>
+            <div class="p-fluid">
+                <app-data-table
+                    [columns]="columns"
+                    [value]="datas"
+                    [selectedData]="selectedData"
+                    (onSelectRow)="onSelectRow($event)"
+                    (onDblclickRow)="onDblclickRow($event)"
+                    [paginator]="pagination && isMasterExpanded"
+                    (onPageChanged)="onPageChanged($event)"
+                >
+                </app-data-table>
+            </div>
+        </p-card>
+    </div>
+    <div
+        [ngClass]="getMasterDetailClass('DETAIL')"
+        *ngIf="!isMasterExpanded"
+        [@slideInOut]
+    >
+        <p-card>
+            <ng-template pTemplate="header">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left">
+                        <h4>
+                            <i class="fa fa-edit p-pr-2"></i>
+                            <strong>Détails menu {{ f.code.value }}</strong>
+                        </h4>
+                    </div>
+                    <div class="p-toolbar-group-right">
+                        <app-menu-detail
+                            [types]="'e,d,c'"
+                            [isEditDisabled]="isEdit"
+                            [isDeleteDisabled]="!canDeleteCopy"
+                            [isCopyDisabled]="!canDeleteCopy"
+                            (editClick)="onEditClick()"
+                            (deleteClick)="onDeleteClick()"
+                            (copyClick)="onCopyClick()"
+                            (closeClick)="onFormCloseClick()"
+                            (maximizeClick)="onFormMaximizeClick()"
+                        >
+                        </app-menu-detail>
+                    </div>
+                </p-toolbar>
+            </ng-template>
+            <div class="p-fluid">
+                <form [formGroup]="formGroup">
+                    <app-input-form
+                        [formGroup]="formGroup"
+                        [name]="'code'"
+                        [label]="'Code'"
+                        [value]="f.code"
+                        [isSubmitted]="isSubmitted"
+                        [isDisabled]="!isEdit"
+                    >
+                    </app-input-form>
+                    <app-input-form
+                        [formGroup]="formGroup"
+                        [name]="'parentCode'"
+                        [label]="'Menu parent'"
+                        [value]="f.parent_code"
+                        [isSubmitted]="isSubmitted"
+                        [isDisabled]="!isEdit"
+                    >
+                    </app-input-form>
+                    <app-input-form
+                        [formGroup]="formGroup"
+                        [name]="'label'"
+                        [label]="'Libellé'"
+                        [value]="f.label"
+                        [isSubmitted]="isSubmitted"
+                        [isDisabled]="!isEdit"
+                    ></app-input-form>
+                    <app-input-form
+                        [formGroup]="formGroup"
+                        [name]="'url'"
+                        [label]="'Url'"
+                        [help]="'commencez par /, pas finissez par '"
+                        [value]="f.url"
+                        [isSubmitted]="isSubmitted"
+                        [isDisabled]="!isEdit"
+                    ></app-input-form>
+                    <app-input-form
+                        [formGroup]="formGroup"
+                        [name]="'icon'"
+                        [label]="'Icon'"
+                        [value]="f.icon"
+                        [isSubmitted]="isSubmitted"
+                        [isDisabled]="!isEdit"
+                    ></app-input-form>
+                </form>
+            </div>
+        </p-card>
+    </div>
+</div>

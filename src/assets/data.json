@@ -1,0 +1,59 @@
+{
+    "application": {
+        "code": "GANTT",
+        "name": "GANTT",
+        "description": "GANTT",
+        "version": "0.0.1",
+        "databaseName": "string",
+        "databaseVersion": "string",
+        "databaseURL": "string",
+        "driverName": "string"
+    },
+    "users": [
+        {
+            "id": 1,
+            "username": "discovery",
+            "password": "gantt",
+            "email": "admin@admin.com",
+            "token": "fake-jwt-token",
+            "profile": {
+                "firstname": "firstName",
+                "lastname": "lastName"
+            }
+        }
+    ],
+    "menus": {
+        "datas": [
+            {
+                "code": "1",
+                "parentCode": "0",
+                "label": "Dashboard",
+                "url": "/dashboard",
+                "icon": "fas fa-box-open"
+            },
+            {
+                "code": "2",
+                "parentCode": "0",
+                "label": "Masterdata",
+                "url": "/mes",
+                "icon": "fas fa-box-open",
+                "menus": [
+                    {
+                        "code": "2.1",
+                        "parentCode": "2",
+                        "label": "Opération planifiée",
+                        "url": "/mes/operationP",
+                        "icon": "fas fa-cubes"
+                    },
+                    {
+                        "code": "2.1",
+                        "parentCode": "2",
+                        "label": "Opération non planifiée",
+                        "url": "/mes/operationNP",
+                        "icon": "fas fa-cubes"
+                    }
+                ]
+            }
+        ]
+    }
+}

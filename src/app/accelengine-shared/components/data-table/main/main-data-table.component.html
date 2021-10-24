@@ -1,0 +1,139 @@
+<p-table
+    #dt
+    dataKey="id"
+    styleClass="p-datatable-striped p-pt-2"
+    [columns]="columns"
+    [frozenColumns]="fixedColumns"
+    [value]="datas"
+    [loading]="loading"
+    [(selection)]="selectedData"
+    [scrollable]="true"
+    [scrollHeight]="'calc(100vh - 395px)'"
+    [frozenWidth]="fixedColumns ? fixedWidth : null"
+    stateStorage="local"
+    [stateKey]="stateKey"
+    csvSeparator=";"
+    [exportFilename]="CSVFilename"
+    (onFilter)="onFilter($event, dt)"
+>
+    <ng-template *ngIf="export" pTemplate="caption">
+        <div class="p-d-flex">
+            <span class="p-input-icon-left p-ml-auto">
+                <button
+                    type="button"
+                    pButton
+                    pRipple
+                    icon="pi pi-file-o"
+                    (click)="exportCSV(dt)"
+                    class="p-mr-2"
+                    pTooltip="CSV"
+                    tooltipPosition="bottom"
+                ></button>
+                <button
+                    type="button"
+                    pButton
+                    pRipple
+                    icon="pi pi-file-excel"
+                    (click)="exportExcel()"
+                    class="p-button-success p-mr-2"
+                    pTooltip="XLS"
+                    tooltipPosition="bottom"
+                ></button>
+                <button
+                    type="button"
+                    pButton
+                    pRipple
+                    icon="pi pi-file-pdf"
+                    (click)="exportPdf()"
+                    class="p-button-warning p-mr-2"
+                    pTooltip="PDF"
+                    tooltipPosition="bottom"
+                ></button>
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <col *ngFor="let col of columns" style="width: 100px" />
+        </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th
+                *ngFor="let column of columns"
+                [pSortableColumn]="column.sort ? column.field : ''"
+            >
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    {{ column.header }}
+                    <p-sortIcon
+                        *ngIf="column.sort"
+                        field="{{ column.field }}"
+                    ></p-sortIcon>
+                    <div class="p-jc-between" style="width: 100%"></div>
+                    <ng-container
+                        [ngSwitch]="column.type"
+                        *ngIf="column.filter"
+                    >
+                        <p-columnFilter
+                            *ngSwitchCase="0"
+                            type="boolean"
+                            field="{{ column.field }}"
+                            display="menu"
+                            class="p-ml-auto"
+                        >
+                        </p-columnFilter>
+                        <p-columnFilter
+                            *ngSwitchCase="1"
+                            type="date"
+                            field="{{ column.field }}"
+                            display="menu"
+                            class="p-ml-auto"
+                        >
+                        </p-columnFilter>
+                        <p-columnFilter
+                            *ngSwitchCase="3"
+                            type="numeric"
+                            field="{{ column.field }}"
+                            display="menu"
+                            class="p-ml-auto"
+                        >
+                        </p-columnFilter>
+                        <p-columnFilter
+                            *ngSwitchCase="4"
+                            type="text"
+                            field="{{ column.field }}"
+                            display="menu"
+                            class="p-ml-auto"
+                        >
+                        </p-columnFilter>
+                        <p-columnFilter
+                            *ngSwitchDefault
+                            type="text"
+                            field="{{ column.field }}"
+                            display="menu"
+                            class="p-ml-auto"
+                        >
+                        </p-columnFilter>
+                    </ng-container>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData" (dblclick)="dblclick(rowData)">
+            <td
+                *ngFor="let column of columns"
+                [innerHTML]="getData(rowData, column)"
+            ></td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-paginator
+    *ngIf="paginator"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="rowsPerPageOptions"
+    (onPageChange)="onPageChange($event)"
+    [showCurrentPageReport]="showCurrentPageReport"
+    currentPageReportTemplate="Affichage de {first} à {last} entrées sur {totalRecords}"
+></p-paginator>

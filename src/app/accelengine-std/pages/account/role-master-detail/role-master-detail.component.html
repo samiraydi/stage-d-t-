@@ -1,0 +1,152 @@
+<div class="p-grid">
+    <div [ngClass]="getMasterDetailClass('MASTER')">
+        <p-card>
+            <ng-template pTemplate="header">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left">
+                        <h4>
+                            <i class="fas fa-list-ul p-pr-2"></i>
+                            <strong>Liste des roles</strong>
+                        </h4>
+                    </div>
+                    <div class="p-toolbar-group-right">
+                        <app-menu-master
+                            [criteria]="criteria"
+                            (criteriaClick)="onClickCriteria()"
+                            (addClick)="onAddClick()"
+                            (reloadClick)="onClickReload()"
+                        ></app-menu-master>
+                    </div>
+                </p-toolbar>
+            </ng-template>
+            <div class="p-fluid">
+                <app-data-table
+                    [stateKey]="'role-master-detail'"
+                    [fixedColumns]="fixedColumns"
+                    [fixedWidth]="'200px'"
+                    [columns]="columns"
+                    [value]="datas"
+                    [selectedData]="selectedData"
+                    (onSelectRow)="onSelectRow($event)"
+                    (onDblclickRow)="onDblclickRow($event)"
+                    [paginator]="pagination && isMasterExpanded"
+                    (onPageChanged)="onPageChanged($event)"
+                >
+                </app-data-table>
+            </div>
+        </p-card>
+    </div>
+    <div
+        [ngClass]="getMasterDetailClass('DETAIL')"
+        *ngIf="!isMasterExpanded"
+        [@slideInOut]
+    >
+        <p-card>
+            <ng-template pTemplate="header">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left">
+                        <h4>
+                            <i class="fa fa-edit p-pr-2"></i>
+                            <strong>Détails role {{ f.code.value }}</strong>
+                        </h4>
+                    </div>
+                    <div class="p-toolbar-group-right">
+                        <app-menu-detail
+                            [types]="'e,d,c'"
+                            [isEditDisabled]="isEdit"
+                            [isDeleteDisabled]="!canDeleteCopy"
+                            [isCopyDisabled]="!canDeleteCopy"
+                            (editClick)="onEditClick()"
+                            (deleteClick)="onDeleteClick()"
+                            (copyClick)="onCopyClick()"
+                            (closeClick)="onFormCloseClick()"
+                            (maximizeClick)="onFormMaximizeClick()"
+                        >
+                        </app-menu-detail>
+                    </div>
+                </p-toolbar>
+            </ng-template>
+            <div class="p-fluid">
+                <form [formGroup]="formGroup">
+                    <p-tabView>
+                        <p-tabPanel header="Role">
+                            <app-input-form
+                                [formGroup]="formGroup"
+                                [name]="'code'"
+                                [label]="'Code'"
+                                [value]="f.code"
+                                [isSubmitted]="isSubmitted"
+                                [isDisabled]="!isEdit"
+                            >
+                            </app-input-form>
+                            <app-input-form
+                                [formGroup]="formGroup"
+                                [name]="'name'"
+                                [label]="'Nom'"
+                                [value]="f.name"
+                                [isSubmitted]="isSubmitted"
+                                [isDisabled]="!isEdit"
+                            >
+                            </app-input-form>
+                        </p-tabPanel>
+                        <p-tabPanel header="Premissions">
+                            <p-toolbar>
+                                <div class="p-toolbar-group-left">
+                                    <h5>
+                                        <i
+                                            class="fa fa-align-justify p-pr-2"
+                                        ></i>
+                                        <strong>Liste des premissions</strong>
+                                    </h5>
+                                </div>
+                                <div class="p-toolbar-group-right">
+                                    <app-menu-crud
+                                        [types]="'a,e,d'"
+                                        [isAddDisabled]="!isEdit"
+                                        [isEditDisabled]="!canDeleteCopyChild"
+                                        [isDeleteDisabled]="!canDeleteCopyChild"
+                                        (addClick)="onAddChildClick($event)"
+                                        (editClick)="onEditChildClick($event)"
+                                        (deleteClick)="
+                                            onDeleteChildClick($event)
+                                        "
+                                    >
+                                    </app-menu-crud>
+                                </div>
+                            </p-toolbar>
+                            <app-data-table
+                                [columns]="columnsChild"
+                                [value]="selectedData.permissions"
+                                [isDisabled]="!isEdit"
+                                [selectedData]="selectedChildData"
+                                (onSelectRow)="onSelectChildRow($event)"
+                                (onDblclickRow)="onDblclickChildRow($event)"
+                            ></app-data-table>
+                        </p-tabPanel>
+                        <p-tabPanel header="Menus">
+                            <p-toolbar>
+                                <div class="p-toolbar-group-left">
+                                    <h5>
+                                        <i
+                                            class="fa fa-align-justify p-pr-2"
+                                        ></i>
+                                        <strong>Liste des menus</strong>
+                                    </h5>
+                                </div>
+                                <div class="p-toolbar-group-right"></div>
+                            </p-toolbar>
+                            <app-selectable-data-table
+                                [columns]="columnsMenus"
+                                [value]="dataMenus"
+                                [(selectedData)]="selectedData.menus"
+                                (onSelectRow)="onSelectChildRow($event)"
+                                (onDblclickRow)="onDblclickChildRow($event)"
+                                [isDisabled]="!isEdit"
+                            ></app-selectable-data-table>
+                        </p-tabPanel>
+                    </p-tabView>
+                </form>
+            </div>
+        </p-card>
+    </div>
+</div>

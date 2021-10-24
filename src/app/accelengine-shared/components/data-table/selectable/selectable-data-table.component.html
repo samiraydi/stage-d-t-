@@ -1,0 +1,62 @@
+<p-table
+    #dt
+    dataKey="id"
+    styleClass="p-datatable-striped p-pt-2"
+    [columns]="columns"
+    [frozenColumns]="fixedColumns"
+    [value]="datas"
+    [loading]="loading"
+    [(selection)]="selectedData"
+    [scrollable]="true"
+    [scrollHeight]="'calc(100vh - 350px)'"
+    [frozenWidth]="fixedColumns ? fixedWidth : null"
+    [(selection)]="selectedData"
+    (onRowSelect)="onRowSelect($event)"
+    (onRowUnselect)="onRowUnselect($event)"
+    (onPage)="onPageChange($event)"
+>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngIf="!isDisabled" style="width: 3rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th
+                *ngFor="let column of columns"
+                [pSortableColumn]="column.sort ? column.field : ''"
+            >
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    {{ column.header }}
+                    <p-sortIcon
+                        *ngIf="column.sort"
+                        field="{{ column.field }}"
+                    ></p-sortIcon>
+                </div>
+            </th>
+        </tr>
+        <tr class="filter">
+            <th></th>
+            <th *ngFor="let column of columns">
+                <input
+                    *ngIf="column.filter"
+                    pInputText
+                    type="text"
+                    (input)="
+                        dt.filter($event.target.value, column.field, 'contains')
+                    "
+                    class="p-column-filter"
+                />
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData" (dblclick)="dblclick(rowData)">
+            <td *ngIf="!isDisabled">
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+            <td
+                *ngFor="let column of columns"
+                [innerHTML]="getData(rowData, column)"
+            ></td>
+        </tr>
+    </ng-template>
+</p-table>

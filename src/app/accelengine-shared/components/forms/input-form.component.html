@@ -1,0 +1,48 @@
+<div class="p-fluid" [formGroup]="formGroup" >
+    <div class="p-field p-grid">
+        <label
+            class="p-col-1 p-md"
+            *ngIf="label != ''"
+            [ngClass]="{ required: isRequired() }"
+        >
+            {{ label | translate }}
+        </label>
+        <div [attr.class]="label != '' ? 'p-col-8' : 'p-col-12'">
+            <div class="p-inputgroup">
+                <span *ngIf="appendLeft" class="p-inputgroup-addon">{{
+                    appendLeft
+                }}</span>
+                <span *ngIf="iconLeft" class="p-inputgroup-addon"
+                    ><span><i class="{{ iconLeft }}"></i></span
+                ></span>
+                <input
+                    pInputText
+                    type="{{ type }}"
+                    formControlName="{{ name }}"
+                    id="{{ name }}"
+                    name="{{ name }}"
+                    [value]="getValue(value)"
+                    class="form-control"
+                    [ngClass]="{
+                        'ng-dirty ng-invalid': isSubmitted && getErrors()
+                    }"
+                    placeholder="{{ placeholder | translate }}"
+                    [attr.disabled]="isDisabled ? '' : null"
+                    (ngModelChange)="onValueChange($event)"
+                />
+                <span *ngIf="appendRight" class="p-inputgroup-addon">{{
+                    appendRight
+                }}</span>
+                <span *ngIf="iconRight" class="p-inputgroup-addon"
+                    ><span><i class="{{ iconRight }}"></i></span
+                ></span>
+            </div>
+            <small>{{ help }}</small>
+            <app-validation-form
+                *ngIf="isSubmitted"
+                [value]="value"
+                class="invalid-feedback"
+            ></app-validation-form>
+        </div>
+    </div>
+</div>

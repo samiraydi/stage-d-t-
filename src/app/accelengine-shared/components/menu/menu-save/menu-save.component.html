@@ -1,0 +1,6 @@
+<div *ngIf="save">
+  <button pButton pRipple class="p-button-lg p-button-danger p-mr-1" icon="fa fa-times fa-lg" label="Annuler"
+    (click)="onCancel()"></button>
+  <button pButton pRipple class="p-button-lg p-button-success" icon="fa fa-save fa-lg" label="Enregistrer" (click)="onSave()"
+    [disabled]="!isValide"></button>
+</div>

@@ -1,0 +1,44 @@
+<div class="form-popup">
+    <form [formGroup]="formGroup">
+        <app-select-form
+            [formGroup]="formGroup"
+            [name]="'document'"
+            [label]="'Document'"
+            [placeholder]="'Indéfini'"
+            [values]="documents"
+            [displayField]="'code'"
+            [value]="f.document"
+            [isSubmitted]="isSubmitted"
+        >
+        </app-select-form>
+        <app-select-form
+            [formGroup]="formGroup"
+            [name]="'action'"
+            [label]="'Action'"
+            [placeholder]="'Indéfini'"
+            [values]="actions"
+            [displayField]="'name'"
+            [value]="f.action"
+            [isSubmitted]="isSubmitted"
+        >
+        </app-select-form>
+    </form>
+    <p-toolbar>
+        <div class="p-toolbar-group-left"></div>
+        <div class="p-toolbar-group-right">
+            <p-button
+                icon="pi pi-times"
+                styleClass="p-button-lg p-button-danger p-mr-1"
+                [label]="closeBtnLabel"
+                (click)="onCancel()"
+            ></p-button>
+            <p-button
+                icon="pi pi-save"
+                styleClass="p-button-lg p-button-success"
+                [label]="saveBtnLabel"
+                (click)="onSubmit()"
+            >
+            </p-button>
+        </div>
+    </p-toolbar>
+</div>

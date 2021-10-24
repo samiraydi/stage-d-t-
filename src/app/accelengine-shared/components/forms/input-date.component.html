@@ -1,0 +1,56 @@
+<div class="p-fluid">
+    <div class="p-field p-grid">
+        <label
+            class="p-col-12 p-md-4"
+            *ngIf="label != ''"
+            [ngClass]="{ required: isRequired() }"
+            >{{ label | translate }}</label
+        >
+        <div
+            *ngIf="isDisabled"
+            [attr.class]="label != '' ? 'p-col-8' : 'p-col-12'"
+        >
+            <input
+                pInputText
+                type="text"
+                id="{{ name }}"
+                name="{{ name }}"
+                [(ngModel)]="dateString"
+                class="form-control"
+                [ngClass]="{
+                    'ng-dirty ng-invalid': isSubmitted && getErrors()
+                }"
+                placeholder="{{ placeholder | translate }}"
+                [attr.disabled]="isDisabled ? '' : null"
+                (change)="onValueChangeString($event)"
+            />
+        </div>
+        <div
+            *ngIf="!isDisabled"
+            [attr.class]="label != '' ? 'p-col-8' : 'p-col-12'"
+        >
+            <p-calendar
+                [(ngModel)]="dateValue"
+                class="form-control"
+                [ngClass]="{
+                    'ng-dirty ng-invalid': isSubmitted && getErrors()
+                }"
+                placeholder="{{ placeholder | translate }}"
+                (ngModelChange)="onValueChangeDate($event)"
+                [dateFormat]="'dd/mm/yy'"
+                [showIcon]="true"
+                [showButtonBar]="true"
+                [monthNavigator]="true"
+                [yearNavigator]="true"
+                yearRange="1970:2150"
+            >
+            </p-calendar>
+            <small>{{ help }}</small>
+            <app-validation-form
+                *ngIf="isSubmitted"
+                [value]="value"
+                class="invalid-feedback"
+            ></app-validation-form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<span *ngIf="criteria" class="p-buttonset p-pr-1">
+    <button
+        pButton
+        pRipple
+        class="p-button-lg p-button-info"
+        (click)="onCriteriaClick()"
+        label="Critères"
+    ></button>
+    <button
+        pButton
+        pRipple
+        class="p-button-lg p-button-info"
+        icon="fa fa-search fa-lg"
+        (click)="onReloadClick()"
+    ></button>
+</span>
+<button
+    class="p-button-lg p-button-info p-mr-1"
+    *ngIf="!criteria"
+    pButton
+    pRipple
+    icon="fa fa-undo fa-lg"
+    (click)="onReloadClick()"
+></button>
+<button
+    pButton
+    pRipple
+    class="p-button-lg p-button-success"
+    *ngIf="displayAdd"
+    [disabled]="false"
+    icon="fa fa-plus fa-lg"
+    (click)="onAddClick()"
+></button>

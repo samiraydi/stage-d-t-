@@ -1,0 +1,17 @@
+.login-body {
+    .login-panel2 {
+        width: 600px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 640px) {
+    .login-body {
+        padding-top: 80px;
+
+        .login-panel2 {
+            width: 100%;
+        }
+    }
+}

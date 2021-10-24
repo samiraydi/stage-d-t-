@@ -1,0 +1,6 @@
+<div style="color: #f44336; padding-left: 0.5rem;"*ngIf="getErrors()">
+    <small *ngIf="value.errors.required">{{'messages.validation.required' | translate}}</small>
+    <small *ngIf="value.errors.email">{{'messages.validation.email' | translate}}</small>
+    <small *ngIf="value.errors.minlength">{{ 'messages.validation.minlength' | translate:{'value':value.errors.minlength.requiredLength} }}</small>
+    <small *ngIf="value.errors.maxlength">{{ 'messages.validation.maxlength' | translate:{'value':value.errors.maxlength.requiredLength} }}</small>
+</div>

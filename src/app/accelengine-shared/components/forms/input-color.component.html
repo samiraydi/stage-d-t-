@@ -1,0 +1,35 @@
+<div class="p-fluid" [formGroup]="formGroup">
+    <div class="p-field p-grid">
+        <label
+            class="p-col-12 p-md-4"
+            *ngIf="label != ''"
+            [ngClass]="{ required: isRequired() }"
+        >
+            {{ label | translate }}
+        </label>
+        <div [attr.class]="label != '' ? 'p-col-8' : 'p-col-12'">
+            <div class="p-inputgroup">
+                <div *ngIf="!isDisabled" class="input-group">
+                    <color-compact
+                        color="getValue(value)"
+                        [colors]="colors"
+                        triangle="hide"
+                        (onChangeComplete)="onColorChange($event)"
+                    >
+                    </color-compact>
+                </div>
+                <div
+                    *ngIf="isDisabled"
+                    class="input-group"
+                    [ngStyle]="getStyle()"
+                ></div>
+                <small>{{ help }}</small>
+                <app-validation-form
+                    *ngIf="isSubmitted"
+                    [value]="value"
+                    class="invalid-feedback"
+                ></app-validation-form>
+            </div>
+        </div>
+    </div>
+</div>

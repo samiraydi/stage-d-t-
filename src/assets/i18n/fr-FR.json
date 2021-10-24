@@ -1,0 +1,73 @@
+{
+	"label": {
+		"email": "Email",
+		"username": "Nom d'utilisateur",
+		"password": "Mot de passe",
+		"full_name": "Nom complet",
+		"firstName": "Prénom",
+		"lastName": "Nom de famille",
+		"type": "Type",
+		"status": "Statut",
+		"delete": "Supprimer"
+	},
+	"button": {
+		"save": "Enregistrer",
+		"cancel": "Annuler",
+		"close": "Fermer"
+	},
+	"user": {
+		"user": "Utilisateur",
+		"users": "Utilisateurs",
+		"users_list": "Liste des utilisateurs"
+	},
+	"messages": {
+		"validation": {
+			"required": "Ce champ est requis",
+			"email": "Adresse e-mail non valide",
+			"minlength": "{{value}} caractères minimum",
+			"maxlength": "{{value}} caractères caractères maximum",
+			"constraint_violation": "Violation de contrainte"
+		},
+		"crud": {
+			"save_ok": "Enregistrement a été effectué avec succès !",
+			"delete_confirmation": "Voulez vous supprimer l'enregistrement sélectionnée ?",
+			"delete_ok": "Enregistrement a été supprimeé avec succès !"
+		},
+		"auth_ko": "Nom d'utilisateur ou mot de passe incorrect !"
+	},
+	"APP": {
+		"FOOTER": {
+			"COPYRIGHT": "Copyright © 2021 Discovery Informatique"
+		}
+	},
+	"error": {
+		"server": {
+			"down": "Le serveur d'application ne répond pas ! contactez l'administrateur de votre domaine pour obtenir de l'aide"
+		},
+		"message": "{{value}}"
+	},
+	"filter": {
+		"startsWith": "Commence avec",
+		"contains": "Contient",
+		"notContains": "Ne contient pas",
+		"endsWith": "Termine avec",
+		"equals": "Égale",
+		"notEquals": "Non égale",
+		"in": "Dans",
+		"lt": "Inférieur à",
+		"lte": "Inférieur ou égale à",
+		"gt": "Supérieur à",
+		"gte": "Supérieur ou égale à",
+		"is": "Est",
+		"isNot": "N'est pas",
+		"before": "Avant",
+		"after": "Après",
+		"matchAll": "Toutes les règles",
+		"matchAny": "Une des règles",
+		"removeRule": "Supprimer la règle",
+		"clear": "Annuler",
+		"apply": "Appliquer",
+		"addRule": "Ajouter une règle",
+		"noFilter": "Pas de filtre"
+	}
+}

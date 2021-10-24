@@ -1,0 +1,38 @@
+<span class="p-buttonset">
+    <button
+        pButton
+        pRipple
+        class="p-button-lg"
+        *ngIf="isAddOK"
+        [disabled]="isAddDisabled"
+        icon="fa fa-plus fa-lg"
+        (click)="add()"
+    ></button>
+    <button
+        pButton
+        pRipple
+        class="p-button-lg"
+        *ngIf="isEditOK"
+        [disabled]="isEditDisabled"
+        icon="fa fa-pen fa-lg"
+        (click)="edit()"
+    ></button>
+    <button
+        pButton
+        pRipple
+        class="p-button-lg"
+        *ngIf="isDeleteOK"
+        [disabled]="isDeleteDisabled"
+        icon="fa fa-trash fa-lg"
+        (click)="delete()"
+    ></button>
+    <button
+        pButton
+        pRipple
+        class="p-button-lg"
+        *ngIf="isCopyOK"
+        [disabled]="isCopyDisabled"
+        icon="fa fa-copy fa-lg"
+        (click)="copy()"
+    ></button>
+</span>

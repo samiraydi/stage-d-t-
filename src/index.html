@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Accelengine</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <link id="theme-css" rel="stylesheet" type="text/css" href="assets/theme/theme-bluegrey.css">
+  <link id="layout-css" rel="stylesheet" type="text/css" href="assets/layout/css/layout-cosmic.css">
+  <link rel="stylesheet" href="assets/dhtmlxgantt.css" type="text/css">
+</head>
+
+<body>
+  <app-root>
+    <div class="splash-screen">
+      <div class="splash-loader">
+        <div class="splash-cube1"></div>
+        <div class="splash-cube2"></div>
+        <div class="splash-cube4"></div>
+        <div class="splash-cube3"></div>
+      </div>
+    </div>
+  </app-root>
+  <style>
+    .drag_handle {
+      background-image: radial-gradient(plum, orange, white);
+      opacity: 0.2;
+      width: 60px;
+      height: 34px;
+    }
+
+    .task_drag {
+      /*display: inline;*/
+      float: left;
+      width: 100%;
+    }
+
+
+    .dragging_task,
+    .dragging_task.gantt_task_line.gantt_milestone .gantt_link_control .gantt_link_point,
+    .dragging_task.gantt_task_line.gantt_milestone .gantt_task_content,
+    .dragging_task.gantt_task_line.gantt_milestone .gantt_side_content {
+      visibility: hidden !important;
+    }
+
+    .gantt_split_parent {
+      opacity: 0.7;
+      pointer-events: all;
+    }
+  </style>
+<!-- http://cdn.dhtmlx.com/gantt/edge/dhtmlxgantt.js -->
+  <script src="assets/gantt.js"></script>
+  <script>
+
+    $(".gantt_save_btn_set").on('click', function () {
+      alert("hi");
+
+      document.querySelector("#save").click();
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,273 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-card>
+            <ng-template pTemplate="header">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left">
+                        <h4>
+                            <i class="fa fa-edit p-pr-2"></i>
+                            <strong>Application</strong>
+                        </h4>
+                    </div>
+                    <div class="p-toolbar-group-right">
+                        <app-menu-detail
+                            [showResiz]="false"
+                            [types]="'e'"
+                            (editClick)="onEditClick()"
+                        ></app-menu-detail>
+                    </div>
+                </p-toolbar>
+            </ng-template>
+            <div class="p-fluid">
+                <div class="p-fluid">
+                    <form [formGroup]="formGroup">
+                        <div class="p-grid">
+                            <div class="p-col-12 p-md-5">
+                                <p-card header="Information">
+                                    <div class="p-fluid">
+                                        <app-input-form
+                                            [formGroup]="formGroup"
+                                            [name]="'code'"
+                                            [label]="'Code'"
+                                            [value]="f.code"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-form>
+                                        <app-input-form
+                                            [formGroup]="formGroup"
+                                            [name]="'name'"
+                                            [label]="'Nom'"
+                                            [value]="f.name"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-form>
+                                        <app-input-textarea-form
+                                            [formGroup]="formGroup"
+                                            [name]="'description'"
+                                            [label]="'Description'"
+                                            [value]="f.description"
+                                            [rows]="4"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-textarea-form>
+                                        <app-input-form
+                                            [formGroup]="formGroup"
+                                            [name]="'version'"
+                                            [label]="'Version'"
+                                            [value]="f.version"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-form>
+                                    </div>
+                                </p-card>
+                                <p-card
+                                    header="Base de données"
+                                    styleClass="p-pt-2"
+                                >
+                                    <div class="p-fluid">
+                                        <app-input-form
+                                            [formGroup]="formGroup"
+                                            [name]="'databaseName'"
+                                            [label]="'Nom de la DB'"
+                                            [value]="f.databaseName"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-form>
+                                        <app-input-form
+                                            [formGroup]="formGroup"
+                                            [name]="'databaseVersion'"
+                                            [label]="'Version de la DB'"
+                                            [value]="f.databaseVersion"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-form>
+                                        <app-input-form
+                                            [formGroup]="formGroup"
+                                            [name]="'databaseURL'"
+                                            [label]="'URL de la DB'"
+                                            [value]="f.databaseURL"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-form>
+                                        <app-input-form
+                                            [formGroup]="formGroup"
+                                            [name]="'driverName'"
+                                            [label]="'Nom du pilote'"
+                                            [value]="f.driverName"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-form>
+                                        <app-input-form
+                                            [formGroup]="formGroup"
+                                            [name]="'driverVersion'"
+                                            [label]="'Version du pilote'"
+                                            [value]="f.driverVersion"
+                                            [isSubmitted]="isSubmitted"
+                                            [isDisabled]="true"
+                                        >
+                                        </app-input-form>
+                                    </div>
+                                </p-card>
+                            </div>
+                            <div class="p-col-12 p-md-7">
+                                <p-card header="Configuration">
+                                    <div class="p-fluid">
+                                        <div formArrayName="settings">
+                                            <p-tabView>
+                                                <p-tabPanel
+                                                    header="{{ module.name }}"
+                                                    *ngFor="
+                                                        let module of selectedData.modules;
+                                                        index as m
+                                                    "
+                                                >
+                                                    <div
+                                                        *ngFor="
+                                                            let setting of settingsArrayByModule(
+                                                                module.name
+                                                            );
+                                                            let i = index
+                                                        "
+                                                    >
+                                                        <div
+                                                            [formGroupName]="
+                                                                setting.value
+                                                                    .formIndex
+                                                            "
+                                                        >
+                                                            <div
+                                                                class="p-fluid"
+                                                                *ngIf="
+                                                                    isTypeString(
+                                                                        setting.value
+                                                                    )
+                                                                "
+                                                            >
+                                                                <div
+                                                                    class="p-field p-grid"
+                                                                >
+                                                                    <label
+                                                                        class="p-col-12 p-mb-4 p-md-4"
+                                                                        >{{
+                                                                            setting
+                                                                                .value
+                                                                                .name
+                                                                        }}</label
+                                                                    >
+                                                                    <div
+                                                                        class="p-col-12 p-mb-8 p-md-8"
+                                                                    >
+                                                                        <input
+                                                                            pInputText
+                                                                            type="text"
+                                                                            formControlName="valueString"
+                                                                            id="{{
+                                                                                i
+                                                                            }}"
+                                                                            class="form-control"
+                                                                            [attr.disabled]="
+                                                                                !isEdit
+                                                                                    ? ''
+                                                                                    : null
+                                                                            "
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="p-fluid"
+                                                                *ngIf="
+                                                                    isTypeNumber(
+                                                                        setting.value
+                                                                    )
+                                                                "
+                                                            >
+                                                                <div
+                                                                    class="p-field p-grid"
+                                                                >
+                                                                    <label
+                                                                        class="p-col-12 p-mb-4 p-md-4"
+                                                                        >{{
+                                                                            setting
+                                                                                .value
+                                                                                .name
+                                                                        }}</label
+                                                                    >
+                                                                    <div
+                                                                        class="p-col-12 p-mb-8 p-md-8"
+                                                                    >
+                                                                        <input
+                                                                            pInputText
+                                                                            type="number"
+                                                                            formControlName="valueNumber"
+                                                                            id="{{
+                                                                                i
+                                                                            }}"
+                                                                            class="form-control"
+                                                                            [attr.disabled]="
+                                                                                !isEdit
+                                                                                    ? ''
+                                                                                    : null
+                                                                            "
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                *ngIf="
+                                                                    isTypeBoolean(
+                                                                        setting.value
+                                                                    )
+                                                                "
+                                                                class="input-group mb-3"
+                                                            >
+                                                                <div
+                                                                    class="p-field p-grid"
+                                                                >
+                                                                    <label
+                                                                        class="p-col-12 p-mb-4 p-md-4"
+                                                                        >{{
+                                                                            setting
+                                                                                .value
+                                                                                .name
+                                                                        }}</label
+                                                                    >
+                                                                    <div
+                                                                        class="p-col-12 p-mb-8 p-md-8"
+                                                                    >
+                                                                        <p-inputSwitch
+                                                                            formControlName="valueBoolean"
+                                                                            inputId="{{
+                                                                                i
+                                                                            }}"
+                                                                            [disabled]="
+                                                                                !isEdit
+                                                                            "
+                                                                        >
+                                                                        </p-inputSwitch>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </p-tabPanel>
+                                            </p-tabView>
+                                        </div>
+                                    </div>
+                                </p-card>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="form-popup">
+    <form [formGroup]="formGroup">
+        <div class="p-fluid">
+            <div class="p-field p-grid" *ngFor="let criteria of getCriterias(); let i=index" formArrayName="criterias">
+                <label class="p-col-12 p-md-3">{{criteria.value.header}}</label>
+                <div class="p-col-12 p-md-4" [formGroupName]="i">
+                    <p-dropdown formControlName="operation" [options]="operations" optionLabel="name"
+                        optionValue="code">
+                    </p-dropdown>
+                </div>
+                <div class="p-col-12 p-md-5" [formGroupName]="i">
+                    <input pInputText type="text" formControlName="value">
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-toolbar>
+        <div class="p-toolbar-group-left"></div>
+        <div class="p-toolbar-group-right">
+            <p-button icon="pi pi-times" styleClass="p-button-lg p-button-danger p-mr-1" [label]="closeBtnLabel"
+                (click)="onCancel()"></p-button>
+            <p-button icon="pi pi-save" styleClass="p-button-lg p-button-success" [label]="saveBtnLabel"
+                (click)="onSubmit()">
+            </p-button>
+        </div>
+    </p-toolbar>
+</div>

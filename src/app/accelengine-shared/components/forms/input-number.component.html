@@ -1,0 +1,41 @@
+<div [formGroup]="formGroup" class="p-fluid">
+    <div class="p-field p-grid">
+        <label
+            *ngIf="label != ''"
+            [ngClass]="{ required: isRequired() }"
+            class="p-col-12 p-md-4"
+            >{{ label | translate }}</label
+        >
+        <div [attr.class]="label != '' ? 'p-col-8' : 'p-col-12'">
+            <p-inputNumber
+                (ngModelChange)="onValueChange($event)"
+                [disabled]="isDisabled"
+                [maxFractionDigits]="maxDigits"
+                [minFractionDigits]="minDigits"
+                [mode]="mode"
+                [ngClass]="{
+                    'ng-dirty ng-invalid': isSubmitted && getErrors()
+                }"
+                class="form-control"
+                formControlName="{{ name }}"
+                id="{{ name }}"
+                name="{{ name }}"
+                placeholder="{{ placeholder | translate }}"
+                [maxlength]="maxlength"
+                [showButtons]="showButtons"
+                [min]="min"
+                [max]="max"
+                [currency]="currency"
+                [locale]="locale"
+            >
+            </p-inputNumber>
+
+            <small>{{ help }}</small>
+            <app-validation-form
+                *ngIf="isSubmitted"
+                [value]="value"
+                class="invalid-feedback"
+            ></app-validation-form>
+        </div>
+    </div>
+</div>

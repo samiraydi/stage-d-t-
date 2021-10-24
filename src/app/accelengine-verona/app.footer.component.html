@@ -1,0 +1,10 @@
+<div class="footer clearfix">
+    <span class="copyright">{{ "APP.FOOTER.COPYRIGHT" | translate }}</span>
+    <div class="footer-right">
+        <app-menu-save
+            [showSave]="showSave"
+            [isValide]="isValide"
+            (onSaveClick)="onSaveClick($event)"
+        ></app-menu-save>
+    </div>
+</div>

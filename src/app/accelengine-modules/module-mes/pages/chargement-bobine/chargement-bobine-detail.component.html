@@ -1,0 +1,168 @@
+<div class="p-grid">
+    <div [ngClass]="getMasterDetailClass('DETAIL')" *ngIf="!isMasterExpanded" [@slideInOut]>
+        <p-card class="main-card">
+            <ng-template pTemplate="header">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left">
+                        <h4>
+                            <i class="fa fa-edit p-pr-2"></i>
+                            <strong>Chargement bobine mère </strong>
+                        </h4>
+                    </div>
+                    <div class="p-toolbar-group-right"></div>
+                </p-toolbar>
+            </ng-template>
+
+            <form [formGroup]="formGroup">
+                <div class="p-pb-5">
+                    <p-card header="Ordre de fabrication">
+                        <div class="p-grid p-pt-5">
+                            <div class="p-col-12 p-md-6 of-cart">
+                                <div class="p-grid">
+                                    <div class="p-col-12 p-md-8">
+                                        <div class="p-field p-grid">
+                                            <label class="p-col-12 p-md-2">OF</label>
+                                            <div class="p-col-12 p-md-10">
+                                                <div class="p-inputgroup">
+                                                    <input formControlName="of" [type]="'text'" name="'of'" pInputText
+                                                        [(value)]="f.of" class="p-inputtext-lg" [disabled]="
+                                                            inputDisabled
+                                                        " />
+                                                    <button type="button" pButton pRipple icon="pi pi-list"
+                                                        styleClass="p-button-warn" (click)="browseOf()" [disabled]="
+                                                            inputDisabled
+                                                        "></button>
+                                                    <button pButton pRipple type="button" icon="pi pi-search" class="
+                                                            p-button-success
+                                                            p-button-lg
+                                                        " [disabled]="
+                                                            inputDisabled
+                                                        " (click)="getOf()"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-col-12 p-md-4">
+                                        <app-input-form [formGroup]="formGroup" [type]="'text'" [name]="'statut'"
+                                            [label]="'Statut'" [value]="f.statut" [isSubmitted]="isSubmitted"
+                                            [isDisabled]="isEdit" class="p-inputtext-lg">
+                                        </app-input-form>
+                                    </div>
+                                </div>
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                        <div class="p-grid">
+                                            <div class="p-col-12 p-md-4">
+                                                <app-input-form [formGroup]="formGroup" [type]="'text'"
+                                                    [name]="'article'" [label]="'Article'" [value]="f.article"
+                                                    [isSubmitted]="isSubmitted" [isDisabled]="isEdit"
+                                                    class="p-inputtext-lg">
+                                                </app-input-form>
+                                            </div>
+                                            <div class="p-col-12 p-md-5">
+                                                <app-input-form [formGroup]="formGroup" [type]="'text'"
+                                                    [name]="'description'" [value]="f.description"
+                                                    [isSubmitted]="isSubmitted" [isDisabled]="isEdit"
+                                                    class="p-inputtext-lg">
+                                                </app-input-form>
+                                            </div>
+                                            <div class="p-col-12 p-md-3">
+                                                <app-input-form [formGroup]="formGroup" [type]="'text'" [name]="'um'"
+                                                    [label]="'UM'" [value]="f.um" [isSubmitted]="isSubmitted"
+                                                    [isDisabled]="isEdit" class="p-inputtext-lg">
+                                                </app-input-form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-col-12 p-md-6">
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                        <div class="p-grid">
+                                            <div class="p-col-12 p-md-6">
+                                                <app-input-form [formGroup]="formGroup" [type]="'text'"
+                                                    [name]="'diametre'" [label]="'Diamètre'" [value]="f.diametre"
+                                                    [isSubmitted]="isSubmitted" [isDisabled]="isEdit"
+                                                    class="p-inputtext-lg">
+                                                </app-input-form>
+                                            </div>
+                                            <div class="p-col-12 p-md-6">
+                                                <app-input-form [formGroup]="formGroup" [type]="'text'"
+                                                    [name]="'grammage'" [label]="'Grammage'" [value]="f.grammage"
+                                                    [isSubmitted]="isSubmitted" [isDisabled]="isEdit"
+                                                    class="p-inputtext-lg">
+                                                </app-input-form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                        <div class="p-grid">
+                                            <div class="p-col-12 p-md-6">
+                                                <app-input-form [formGroup]="formGroup" [type]="'text'" [name]="'laize'"
+                                                    [label]="'Laize'" [value]="f.laize" [isSubmitted]="isSubmitted"
+                                                    [isDisabled]="isEdit" class="p-inputtext-lg">
+                                                </app-input-form>
+                                            </div>
+                                            <div class="p-col-12 p-md-6">
+                                                <app-input-form [formGroup]="formGroup" [type]="'text'"
+                                                    [name]="'poidsMoyen'" [label]="'Poids Moyen'" [value]="f.poidsMoyen"
+                                                    [isSubmitted]="isSubmitted" [isDisabled]="isEdit"
+                                                    class="p-inputtext-lg">
+                                                </app-input-form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-card>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-3 devidoire" *ngFor="let dev of devidoirs">
+                        <p-panel>
+                            <p-header>
+                                <h4>Dévidoire N°:{{ dev.devidoir }}</h4>
+                            </p-header>
+                            <div class="p-d-flex p-jc-between">
+                                <span>
+                                    <h6>
+                                        Devidoir :
+                                        <strong>{{ dev.location }}</strong>
+                                    </h6>
+                                </span><span>
+                                    <h6>Lot :{{ dev.lot }}</h6>
+                                </span>
+                            </div>
+                            <div class="p-d-flex p-jc-between">
+                                <span><strong>N Bobine : {{ dev.serial }}</strong>
+                                </span>
+                                <span>Ref : {{ dev.ref }} </span>
+                            </div>
+                            <div class="p-d-none">
+                                {{ dev.statut }}
+                            </div>
+                            <p-chart type="pie" [data]="dev.data" width="150" height="150" [options]="options">
+                            </p-chart>
+
+                            <p-footer>
+                                <div class="p-d-flex p-jc-end">
+                                    <div>
+                                        <button pButton pRipple type="button" icon="pi pi-arrow-circle-down"
+                                            class="p-mr-2 p-button-rounded" [disabled]="dev.statut == 'vide'"
+                                            (click)="decharger(dev)"></button>
+                                        <button pButton pRipple type="button" icon="pi pi-search"
+                                            class="p-mr-2 p-button-rounded" (click)="bobineList(dev)"></button>
+                                    </div>
+                                </div>
+                            </p-footer>
+                        </p-panel>
+                    </div>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</div>
